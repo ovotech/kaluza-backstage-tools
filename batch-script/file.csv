@@ -1,0 +1,4 @@
+name,description,owner,githubSlug,circleSlug,tags,system,type,architectureLinks,technicalLinks,supportLinks,dependsOn,providesApis,consumesApis
+example-service,This is an example service,example-team,ovotech/example-service,github/ovotech/example-service,"test
+test1
+test2",example-system,infra,https://.../some-arch-doc,http://.../some-tech-doc,https://.../some-support-doc,dependency,api:produces,api:consumes

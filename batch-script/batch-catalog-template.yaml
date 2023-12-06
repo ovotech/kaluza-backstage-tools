@@ -1,0 +1,64 @@
+{%- if system %}
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: "{{ system }}"
+  title: "{{ system }}"
+  description: "System representing {{ system }}"
+spec:
+  owner: "{{ owner }}"
+{%- endif %}
+---
+apiVersion: "backstage.io/v1alpha1"
+kind: "Component"
+metadata:
+  name: "{{ name }}"
+  title: "{{ name }}"
+  description: "{{ description }}"
+  annotations:
+    github.com/project-slug: "{{ githubSlug }}"
+    {%- if circleCI %}
+    circleci.com/project-slug: "{{ circleSlug }}"
+    {%- endif %}
+  {%- if tags %}
+  tags:
+    {%- for tag in tags %}
+    - "{{ tag }}"
+    {%- endfor %}
+  {%- endif %}
+  {%- if links %}
+  links:
+    {%- for link in links %}
+    - url: "{{ link.url }}"
+      title: "{{ link.title }}"
+      {%- if link.icon %}
+      icon: "{{ link.icon }}"
+      {%- endif %}
+    {%- endfor %}
+  {%- endif %}
+spec:
+  type: {%- if type %} "{{ type }}" {%- else %} "service" {%- endif %}
+  owner: "{{ owner }}"
+  lifecycle: "production"
+  {%- if system %}
+  system: "{{ system }}"
+  {%- endif %}
+  {%- if dependsOn %}
+  dependsOn:
+    {%- for dependency in dependsOn %}
+    - "{{ dependency }}"
+    {%- endfor %}
+  {%- endif %}
+  {%- if consumesApis %}
+  consumesApis:
+    {%- for api in consumesApis %}
+    - "{{ api }}"
+    {%- endfor %}
+  {%- endif %}
+  {%- if providesApis %}
+  providesApis:
+    {%- for api in providesApis %}
+    - "{{ api }}"
+    {%- endfor %}
+  {%- endif %}
